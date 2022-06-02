@@ -28,9 +28,9 @@ const genDiff = (pathFile1, pathFile2) => {
   // console.log('data2', data2);
 
   const result = uniqArr.map((item) => {
-    if (data1.includes(item) && data2.includes(item)) return ` ${item}`;
     if (data1.includes(item) && !data2.includes(item)) return `- ${item}`;
     if (!data1.includes(item) && data2.includes(item)) return `+ ${item}`;
+    return ` ${item}`;
   });
 
   // console.log('result', result);
