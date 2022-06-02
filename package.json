@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "gendiff": "bin/gendiff.js"
+    "gendiff": "src/bin/gendiff.js"
   },
   "main": "index.js",
   "scripts": {
@@ -13,8 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^9.2.0",
-    "lodash": "^4.17.21"
+    "commander": "^9.3.0",
+    "lodash": "^4.17.21",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "eslint": "^8.16.0",
