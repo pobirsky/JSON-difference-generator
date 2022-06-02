@@ -1,0 +1,6 @@
+ hexlet.io: host
+- 50: timeout
+- 123.234.53.22: proxy
+- false: follow
++ 20: timeout
++ true: verbose

@@ -1,5 +1,6 @@
 install:
 	npm ci
+	npm link
 publish:
 	npm publish --dry-run
 lint:
@@ -7,4 +8,4 @@ lint:
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
 test:
-	npm test
+	NODE_OPTIONS=--experimental-vm-modules npx jest

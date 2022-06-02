@@ -37,4 +37,4 @@ const genDiff = (pathFile1, pathFile2) => {
   return result.join('\n');
 };
 
-export default genDiff;
+export { genDiff, getContentObj };
