@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import genDiff from '../index.js';
+import genDiff from '../index.js';// eslint-disable-line import/extensions
 
 const program = new Command();
 
@@ -12,7 +12,8 @@ program
   .option('-f, --format <type>', 'output format')
   .action((file1, file2) => {
     const diff = genDiff(file1, file2);
-    console.log(diff);
-  })
+    // eslint-disable-line no-use-before-define
+    console.log(diff);// eslint-disable-line no-console
+  });
 
 program.parse(process.argv);
