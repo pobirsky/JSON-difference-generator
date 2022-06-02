@@ -1,14 +1,17 @@
 import _ from 'lodash';
 import fs from 'node:fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const getFixturePath = (filename) => path.join(path.resolve(), '..', 'frontend-project-lvl2/__test__/__fixtures__', filename);
+/* eslint no-underscore-dangle: 0 */
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const getPath = (filename) => path.join(__dirname, '..', '__test__/__fixtures__', filename);
 
 const getContentObj = (filepath) => {
-  const absoluteFile = getFixturePath(filepath);
-  const read = fs.readFileSync(absoluteFile);
-  const readJson = JSON.parse(read);
-  return readJson;
+  const filePath = path.isAbsolute(filepath) ? filepath : getPath(filepath);
+  const readJson = fs.readFileSync(filePath);
+  const content = JSON.parse(readJson);
+  return content;
 };
 
 const genDiff = (pathFile1, pathFile2) => {
@@ -37,4 +40,4 @@ const genDiff = (pathFile1, pathFile2) => {
   return result.join('\n');
 };
 
-export { genDiff, getContentObj };
+export default genDiff;
