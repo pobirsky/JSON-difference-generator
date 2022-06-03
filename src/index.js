@@ -2,6 +2,7 @@ import _ from 'lodash';
 import fs from 'node:fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import parse from './bin/parser.js'
 
 /* eslint no-underscore-dangle: 0 */
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -9,9 +10,9 @@ const getPath = (filename) => path.join(__dirname, '..', '__test__/__fixtures__'
 
 const getContentObj = (filepath) => {
   const filePath = path.isAbsolute(filepath) ? filepath : getPath(filepath);
-  const readJson = fs.readFileSync(filePath);
-  const content = JSON.parse(readJson);
-  return content;
+  const fileContent = fs.readFileSync(filePath,'utf8');
+  const extension = path.extname(filePath)
+  return parse(fileContent, extension);
 };
 
 const genDiff = (pathFile1, pathFile2) => {
