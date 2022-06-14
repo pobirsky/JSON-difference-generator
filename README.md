@@ -6,4 +6,5 @@
 ### Asciinema gendiff JSON
 [![asciicast](https://asciinema.org/a/SZocmdFQWmcYprweroYq30W3A.svg)](https://asciinema.org/a/SZocmdFQWmcYprweroYq30W3A)
 
-
+### Asciinema gendiff JSON fail
+[![asciicast](https://asciinema.org/a/sYCR1NmidIpUw7ONA8mcTeESJ.svg)](https://asciinema.org/a/sYCR1NmidIpUw7ONA8mcTeESJ)
