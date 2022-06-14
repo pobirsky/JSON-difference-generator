@@ -1,1 +1,10 @@
 node_modules
+coverage
+
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build

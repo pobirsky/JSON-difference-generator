@@ -1,12 +1,12 @@
-import _ from 'lodash';
 import fs from 'node:fs';
-import path from 'path';
 import { fileURLToPath } from 'url';
-import parse from './bin/parser';
+import path from 'path';
+import parse from './bin/parser.js';
+import getFormat from './formatters/stylish.js';
+import buildTree from './buildDiff.js';
 
-/* eslint no-underscore-dangle: 0 */
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const getPath = (filename) => path.join(__dirname, '..', '__test__/__fixtures__', filename);
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+const getPath = (filename) => path.join(dirname, '..', '__test__/__fixtures__', filename);
 
 const getContentObj = (filepath) => {
   const filePath = path.isAbsolute(filepath) ? filepath : getPath(filepath);
@@ -15,30 +15,14 @@ const getContentObj = (filepath) => {
   return parse(fileContent, extension);
 };
 
-const genDiff = (pathFile1, pathFile2) => {
-  const content1 = getContentObj(pathFile1);
-  const content2 = getContentObj(pathFile2);
-  const data1 = [];
-  const data2 = [];
+const genDiff = (path1, path2, format = 'stylish') => {
+  const file1 = getContentObj(path1);
+  const file2 = getContentObj(path2);
 
-  _.forIn(content1, (value, key) => data1.push(`${value}: ${key}`));
-  _.forIn(content2, (value, key) => data2.push(`${value}: ${key}`));
+  const diff = buildTree(file1, file2);
+  const diffFormat = getFormat(diff, format);
 
-  const container = data1.concat(data2);
-  const uniqArr = [...new Set(container)];
-
-  // console.log('uniqArr', uniqArr);
-  // console.log('data1', data1);
-  // console.log('data2', data2);
-
-  const result = uniqArr.map((item) => {
-    if (data1.includes(item) && !data2.includes(item)) return `- ${item}`;
-    if (!data1.includes(item) && data2.includes(item)) return `+ ${item}`;
-    return ` ${item}`;
-  });
-
-  // console.log('result', result);
-  return result.join('\n');
+  return diffFormat;
 };
 
 export default genDiff;

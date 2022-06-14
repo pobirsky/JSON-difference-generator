@@ -15,9 +15,9 @@ test('genDiffTest', () => {
   expect(genDiff(path1, path2)).toEqual(correctJs);
 });
 
-test('genDiff ext-yml, ext-yaml', () => {
-  const path1 = getFixturePath('file1.yml');
-  const path2 = getFixturePath('file2.yml');
-  const correctYml = readFile('correctYml.txt');
-  expect(genDiff(path1, path2)).toEqual(correctYml);
-});
+// test('genDiff ext-yml, ext-yaml', () => {
+//   const path1 = getFixturePath('file1.yml');
+//   const path2 = getFixturePath('file2.yml');
+//   const correctYml = readFile('correctYml.txt');
+//   expect(genDiff(path1, path2)).toEqual(correctYml);
+// });
