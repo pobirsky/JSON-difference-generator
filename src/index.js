@@ -21,7 +21,6 @@ const genDiff = (path1, path2, format = 'stylish') => {
 
   const diff = buildTree(file1, file2);
   const diffFormat = getFormat(diff, format);
-
   return diffFormat;
 };
 

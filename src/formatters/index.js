@@ -1,9 +1,8 @@
-import stylish from './stylish';
+import stylish from './stylish.js';
+
+const formatters = { stylish };
 
 const getFormat = (diff, format) => {
-  const formatters = {
-    stylish,
-  };
   const formatter = formatters[format];
   return formatter(diff);
 };
