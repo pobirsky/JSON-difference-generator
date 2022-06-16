@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import parse from './bin/parser.js';
-import getFormat from './formatters/stylish.js';
 import buildTree from './buildDiff.js';
+import getFormat from './formatters/index.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const getPath = (filename) => path.join(dirname, '..', '__test__/__fixtures__', filename);
