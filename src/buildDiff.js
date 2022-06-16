@@ -8,39 +8,39 @@ const buildDiff = (config1, config2) => {
     if (_.has(object1, key) && !_.has(object2, key)) {
       return {
         name: key,
-        type: "deleted",
+        type: 'deleted',
         value1,
-        value2: null
+        value2: null,
       };
     }
 
     if (!_.has(object1, key) && _.has(object2, key)) {
       return {
         name: key,
-        type: "added",
+        type: 'added',
         value1: null,
-        value2
+        value2,
       };
     }
 
     if (_.isPlainObject(value1) && _.isPlainObject(value1)) {
       return {
         name: key,
-        type: "nested",
-        children: buildDiff(value1, value2)
+        type: 'nested',
+        children: buildDiff(value1, value2),
       };
     }
 
     if (!_.isEqual(value1, value2)) {
       return {
-        key,
-        type: "changed",
+        name: key,
+        type: 'changed',
         value1,
-        value2
+        value2,
       };
     }
 
-    return { name: key, type: "unchanged", value1 };
+    return { name: key, type: 'unchanged', value1 };
   };
 
   const keys = _.union(Object.keys(config1), Object.keys(config2));
@@ -51,4 +51,4 @@ const buildDiff = (config1, config2) => {
   return result;
 };
 
-export default buildTree;
+export default buildDiff;
