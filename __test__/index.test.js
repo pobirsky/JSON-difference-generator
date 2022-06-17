@@ -3,7 +3,7 @@
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import path from 'path';
-import genDiff, {getContentObj} from '../src/index';
+import genDiff, { getContentObj } from '../src/index';
 import buildDiff from "../src/buildDiff.js";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -17,13 +17,13 @@ test('genDiffTestDefault', () => {
   expect(genDiff(path1, path2)).toEqual(correctJs);
 });
 
-// test('genDiffTestPlain', () => {
-//   const path1 = getFixturePath('file1.json');
-//   const path2 = getFixturePath('file2.json');
-//   const correctJs = readFile('correctPlain.txt');
-//   expect(genDiff(path1, path2, 'plain')).toEqual(correctJs);
-// });
-//
+test('genDiffTestPlain', () => {
+  const path1 = getFixturePath('file1.json');
+  const path2 = getFixturePath('file2.json');
+  const correctJs = readFile('correctPlain.txt');
+  expect(genDiff(path1, path2, 'plain')).toEqual(correctJs);
+});
+
 // test('ACT test', () => {
 //   const obj1 = getContentObj('file1.json');
 //   const obj2 = getContentObj('file2.json');

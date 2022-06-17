@@ -1,20 +1,21 @@
 const format = (val) => {
+  if (val === null) {
+    return null;
+  }
   if (typeof val === 'object') {
     return '[complex value]';
   }
   if (typeof val === 'string') {
     return `'${val}'`;
   }
-  if (val === null) {
-    return null;
-  }
   return val;
 };
 
 const plain = (data) => {
   const iter = (children, parent) => {
-    const diffColl = children.map((node) => {
+    const diffColl = children.flatMap((node) => {
       const newPath = parent ? `${parent}.${node.name}` : `${node.name}`;
+      console.log(`${parent}`)
       switch (node.type) {
         case 'nested':
           return iter(node.children, newPath);
@@ -25,13 +26,13 @@ const plain = (data) => {
         case 'changed':
           return `Property '${newPath}' was updated. From ${format(node.value1)} to ${format(node.value2)}`;
         default:
-          return '';
+          return [];
       }
     });
-    console.log(diffColl, children)
+    console.log(diffColl);
     return diffColl.join('\n');
   };
-  const result = iter(data, 'data');
+  const result = iter(data, '');
   return result;
 };
 

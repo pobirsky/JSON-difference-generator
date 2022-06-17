@@ -7,9 +7,11 @@ const getTab = (currentDepth, multiplier = 4) => {
 };
 
 const getFormattedValue = (value, depth) => {
-
   if (!_.isObject(value)) {
     return String(value);
+  }
+  if (_.isNull(value)) {
+    return null;
   }
 
   const tab = getTab(depth, 4);
@@ -28,6 +30,7 @@ const formatter = (tree) => {
   const iter = (node, depth) => {
     const arrMap = node.map((key) => {
       const tab = getTab(depth);
+
       switch (key.type) {
         case 'nested': {
           const formattedChildren = iter(key.children, depth + 1);

@@ -25,4 +25,4 @@ const genDiff = (path1, path2, format = 'stylish') => {
 };
 
 export default genDiff;
-export {getContentObj};
+export { getContentObj };
