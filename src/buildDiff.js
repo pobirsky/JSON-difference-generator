@@ -5,15 +5,6 @@ const buildDiff = (config1, config2) => {
     const value1 = object1[key];
     const value2 = object2[key];
 
-    if (_.has(object1, key) && !_.has(object2, key)) {
-      return {
-        name: key,
-        type: 'deleted',
-        value1,
-        value2: null,
-      };
-    }
-
     if (!_.has(object1, key) && _.has(object2, key)) {
       return {
         name: key,
@@ -23,7 +14,16 @@ const buildDiff = (config1, config2) => {
       };
     }
 
-    if (_.isPlainObject(value1) && _.isPlainObject(value1)) {
+    if (_.has(object1, key) && !_.has(object2, key)) {
+      return {
+        name: key,
+        type: 'deleted',
+        value1,
+        value2: null,
+      };
+    }
+
+    if (typeof value1 === 'object' && typeof value2 === 'object') {
       return {
         name: key,
         type: 'nested',
@@ -43,11 +43,9 @@ const buildDiff = (config1, config2) => {
     return { name: key, type: 'unchanged', value1 };
   };
 
-  const keys = _.union(Object.keys(config1), Object.keys(config2));
+  const keys = _.union(Object.keys(config1), Object.keys(config2)).sort();
   // console.log(keys);
   const result = keys.map((key) => iter(config1, config2, key));
-  // console.log(result);
-  // console.log(JSON.stringify(result, null, " "));
   return result;
 };
 

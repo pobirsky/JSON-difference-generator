@@ -7,6 +7,7 @@ const getTab = (currentDepth, multiplier = 4) => {
 };
 
 const getFormattedValue = (value, depth) => {
+
   if (!_.isObject(value)) {
     return String(value);
   }
@@ -62,7 +63,7 @@ const formatter = (tree) => {
           return formattedOldValue + formattedNewValue;
         }
         default: {
-          return null;
+          return 'kek';
         }
       }
     });

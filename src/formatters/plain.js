@@ -13,14 +13,11 @@ const format = (val) => {
 
 const plain = (data) => {
   const iter = (children, parent) => {
-    const diffColl = children.flatMap((node) => {
+    const diffColl = children.map((node) => {
       const newPath = parent ? `${parent}.${node.name}` : `${node.name}`;
       switch (node.type) {
         case 'nested':
           return iter(node.children, newPath);
-        // если узел не менялся не выводим []
-        case 'unchanged':
-          return [];
         case 'deleted':
           return `Property '${newPath}' was removed`;
         case 'added':
@@ -28,9 +25,10 @@ const plain = (data) => {
         case 'changed':
           return `Property '${newPath}' was updated. From ${format(node.value1)} to ${format(node.value2)}`;
         default:
-          return null;
+          return '';
       }
     });
+    console.log(diffColl, children)
     return diffColl.join('\n');
   };
   const result = iter(data, 'data');
