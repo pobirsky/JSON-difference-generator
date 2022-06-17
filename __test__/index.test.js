@@ -3,8 +3,7 @@
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import path from 'path';
-import genDiff, { getContentObj } from '../src/index';
-import buildDiff from "../src/buildDiff.js";
+import genDiff from '../src/index';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const getFixturePath = (filename) => path.join(dirname, '..', '__test__/__fixtures__', filename);
