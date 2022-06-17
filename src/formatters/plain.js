@@ -33,7 +33,7 @@ const plain = (data) => {
     });
     return diffColl.join('\n');
   };
-  const result = iter(data, '');
+  const result = iter(data, 'data');
   return result;
 };
 
