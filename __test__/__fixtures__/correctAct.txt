@@ -4,6 +4,12 @@
     "type": "nested",
     "children": [
       {
+        "name": "follow",
+        "type": "added",
+        "value1": null,
+        "value2": false
+      },
+      {
         "name": "setting1",
         "type": "unchanged",
         "value1": "Value 1"
@@ -21,14 +27,23 @@
         "value2": null
       },
       {
+        "name": "setting4",
+        "type": "added",
+        "value1": null,
+        "value2": "blah blah"
+      },
+      {
+        "name": "setting5",
+        "type": "added",
+        "value1": null,
+        "value2": {
+          "key5": "value5"
+        }
+      },
+      {
         "name": "setting6",
         "type": "nested",
         "children": [
-          {
-            "name": "key",
-            "type": "unchanged",
-            "value1": "value"
-          },
           {
             "name": "doge",
             "type": "nested",
@@ -42,32 +57,17 @@
             ]
           },
           {
+            "name": "key",
+            "type": "unchanged",
+            "value1": "value"
+          },
+          {
             "name": "ops",
             "type": "added",
             "value1": null,
             "value2": "vops"
           }
         ]
-      },
-      {
-        "name": "follow",
-        "type": "added",
-        "value1": null,
-        "value2": false
-      },
-      {
-        "name": "setting4",
-        "type": "added",
-        "value1": null,
-        "value2": "blah blah"
-      },
-      {
-        "name": "setting5",
-        "type": "added",
-        "value1": null,
-        "value2": {
-          "key5": "value5"
-        }
       }
     ]
   },
@@ -88,33 +88,11 @@
       },
       {
         "name": "nest",
-        "type": "nested",
-        "children": [
-          {
-            "name": "key",
-            "type": "deleted",
-            "value1": "value",
-            "value2": null
-          },
-          {
-            "name": "0",
-            "type": "added",
-            "value1": null,
-            "value2": "s"
-          },
-          {
-            "name": "1",
-            "type": "added",
-            "value1": null,
-            "value2": "t"
-          },
-          {
-            "name": "2",
-            "type": "added",
-            "value1": null,
-            "value2": "r"
-          }
-        ]
+        "type": "changed",
+        "value1": {
+          "key": "value"
+        },
+        "value2": "str"
       }
     ]
   },

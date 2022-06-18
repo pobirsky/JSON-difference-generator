@@ -1,2 +1,3 @@
-export default (data) => JSON.stringify(data, null, 2);
+const toJson = (data) => JSON.stringify(data, null, 2);
 
+export default toJson;
