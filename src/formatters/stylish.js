@@ -7,11 +7,8 @@ const getTab = (currentDepth, multiplier = 4) => {
 };
 
 const getFormattedValue = (value, depth) => {
-  if (!_.isObject(value)) {
-    return String(value);
-  }
-  if (_.isNull(value)) {
-    return null;
+  if (typeof value !== 'object' || value === null ) {
+    return value;
   }
 
   const tab = getTab(depth, 4);

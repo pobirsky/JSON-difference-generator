@@ -28,7 +28,7 @@ const plain = (data) => {
           return [];
       }
     });
-    console.log(diffColl);
+    // console.log(diffColl);
     return diffColl.join('\n');
   };
   const result = iter(data, '');
