@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
-import BuildDiff from "../src/buildDiff.js";
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import path from 'path';
-import genDiff from '../src/index';
-import {getContentObj} from "../src/index";
+import BuildDiff from '../src/buildDiff.js';
+import genDiff, { getContentObj } from '../src/index';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const getFixturePath = (filename) => path.join(dirname, '..', '__test__/__fixtures__', filename);
@@ -41,9 +40,7 @@ test('genDiffTestDefault', () => {
 test('ACT test', () => {
   const obj1 = getContentObj('file1.json');
   const obj2 = getContentObj('file2.json');
-  const AST = JSON.stringify(BuildDiff(obj1, obj2),null,2);
+  const AST = JSON.stringify(BuildDiff(obj1, obj2), null, 2);
   const result = readFile('correctACT.txt');
   expect(AST).toEqual(result);
 });
-
-

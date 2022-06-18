@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 const getTab = (currentDepth, multiplier = 4) => {
   const space = ' ';
   const result = space.repeat(currentDepth * multiplier - 2);
@@ -7,7 +5,7 @@ const getTab = (currentDepth, multiplier = 4) => {
 };
 
 const getFormattedValue = (value, depth) => {
-  if (typeof value !== 'object' || value === null ) {
+  if (typeof value !== 'object' || value === null) {
     return value;
   }
 
