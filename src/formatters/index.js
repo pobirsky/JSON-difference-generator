@@ -4,14 +4,12 @@ import json from './json.js';
 
 const getFormat = (tree, format) => {
   switch (format) {
-    case 'stylish':
-      return stylish(tree);
     case 'plain':
       return plain(tree);
     case 'json':
       return json(tree);
     default:
-      return null;
+      return stylish(tree);
   }
 };
 
