@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'url';
 import path from 'path';
-import fs from 'node:fs';
+import fs from 'fs';
 import parse from './bin/parser.js';
 import buildTree from './buildDiff.js';
 import getFormat from './formatters/index.js';
