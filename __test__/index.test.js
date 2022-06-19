@@ -41,6 +41,6 @@ test('ACT test', () => {
   const obj1 = getContentObj('file1.json');
   const obj2 = getContentObj('file2.json');
   const AST = JSON.stringify(BuildDiff(obj1, obj2), null, 2);
-  const result = readFile('correctACT.txt');
+  const result = readFile('correctAct.txt');
   expect(AST).toEqual(result);
 });
