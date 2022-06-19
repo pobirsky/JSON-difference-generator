@@ -15,7 +15,10 @@ const getFormattedValue = (value, depth) => {
   const entries = Object.entries(value);
 
   const result = entries.map(([key, innerValue]) => {
-    const tempString = `${tab}  ${key}: ${getFormattedValue(innerValue, depth + 1)}`;
+    const tempString = `${tab}  ${key}: ${getFormattedValue(
+      innerValue,
+      depth + 1,
+    )}`;
     return tempString;
   });
   return ['{', ...result, `${tabClose}  }`].join('\n');
