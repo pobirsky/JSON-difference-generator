@@ -43,7 +43,7 @@ const buildDiff = (config1, config2) => {
     return { name: key, type: 'unchanged', value1 };
   };
 
-  const keys = _.sortedUniq(_.union(Object.keys(config1), Object.keys(config2)));
+  const keys = _.sortBy(_.union(Object.keys(config1), Object.keys(config2)));
   // console.log(keys);
   const result = keys.map((key) => iter(config1, config2, key));
   return result;
