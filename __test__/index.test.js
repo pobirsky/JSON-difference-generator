@@ -23,7 +23,7 @@ test('genDiffTestPlain', () => {
   expect(genDiff(path1, path2, 'plain')).toEqual(correct);
 });
 
-test('genDiffTestDefault', () => {
+test('genDiffTestDefaultYml', () => {
   const path1 = getFixturePath('file1.yml');
   const path2 = getFixturePath('file2.yml');
   const correct = readFile('correctYml.txt');
