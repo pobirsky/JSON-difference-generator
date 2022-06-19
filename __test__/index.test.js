@@ -30,7 +30,7 @@ test('genDiffTestDefault', () => {
   expect(genDiff(path1, path2)).toEqual(correct);
 });
 
-test('genDiffTestDefault', () => {
+test('genDiffTestPlain', () => {
   const path1 = getFixturePath('file1.yml');
   const path2 = getFixturePath('file2.yml');
   const correct = readFile('correctPlain.txt');
