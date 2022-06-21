@@ -45,4 +45,8 @@ Section "group2" deleted.
 ### Asciinema gendiff JSON fail
 [![asciicast](https://asciinema.org/a/sYCR1NmidIpUw7ONA8mcTeESJ.svg)](https://asciinema.org/a/sYCR1NmidIpUw7ONA8mcTeESJ)
 
+### Asciinema gendiff JSON plain format
+[![asciicast](https://asciinema.org/a/XiFnRcbxvCyLxUVY3Pjdaz2mO.svg)](https://asciinema.org/a/XiFnRcbxvCyLxUVY3Pjdaz2mO)
 
+### Asciinema gendiff YML result JSON
+[![asciicast](https://asciinema.org/a/3ZE0QwW4wkq0bVTyQLZf53xUc.svg)](https://asciinema.org/a/3ZE0QwW4wkq0bVTyQLZf53xUc)
