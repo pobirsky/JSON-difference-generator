@@ -4,8 +4,7 @@ import parse from './parser.js';
 import buildTree from './buildDiff.js';
 import diff from './formatters/index.js';
 
-const baseFolder = './__test__/__fixtures__/';
-const getPath = (filePath) => path.resolve(process.cwd(), baseFolder, filePath);
+const getPath = (filePath) => path.resolve(process.cwd(), filePath);
 
 const getData = (pathFile) => {
   const filePath = getPath(pathFile);
