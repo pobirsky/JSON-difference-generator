@@ -4,8 +4,8 @@ import plain from './plain.js';
 const toJson = (data) => JSON.stringify(data, null, 2);
 
 const renderActions = {
-  stylish: stylish,
-  plain: plain,
+  stylish,
+  plain,
   json: toJson,
 };
 
