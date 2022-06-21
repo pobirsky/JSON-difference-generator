@@ -8,3 +8,5 @@ coverage
 
 # production
 /build
+
+.DS_Store

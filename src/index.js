@@ -1,28 +1,32 @@
-import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
-import parse from './bin/parser.js';
+import parse from './parser.js';
 import buildTree from './buildDiff.js';
-import getFormat from './formatters/index.js';
+import diff from './formatters/index.js';
 
-const dirname = path.dirname(fileURLToPath(import.meta.url));
-const getPath = (filename) => path.join(dirname, '..', '__test__/__fixtures__', filename);
+const baseFolder = './__test__/__fixtures__/';
+const getPath = (filePath) => path.resolve(process.cwd(), baseFolder, filePath);
 
-const getContentObj = (filepath) => {
-  const filePath = path.isAbsolute(filepath) ? filepath : getPath(filepath);
-  const fileContent = fs.readFileSync(filePath);
-  const extension = path.extname(filePath);
-  return parse(fileContent, extension);
+const getData = (pathFile) => {
+  const filePath = getPath(pathFile);
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const extension = path.extname(filePath).slice(1);
+  return {
+    content,
+    extension,
+  };
 };
 
-const genDiff = (path1, path2, format = 'stylish') => {
-  const file1 = getContentObj(path1);
-  const file2 = getContentObj(path2);
+const genDiff = (path1, path2, format) => {
+  const data1 = getData(path1);
+  const data2 = getData(path2);
 
-  const diff = buildTree(file1, file2);
-  const diffFormat = getFormat(diff, format);
-  return diffFormat;
+  const file1 = parse(data1.content, data1.extension);
+  const file2 = parse(data2.content, data2.extension);
+
+  const tree = buildTree(file1, file2);
+  return diff(tree, format);
 };
 
 export default genDiff;
-export { getContentObj };
+export { getData };

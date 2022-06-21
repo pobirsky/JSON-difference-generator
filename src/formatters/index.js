@@ -1,16 +1,12 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
-import json from './json.js';
 
-const getFormat = (tree, format) => {
-  switch (format) {
-    case 'plain':
-      return plain(tree);
-    case 'json':
-      return json(tree);
-    default:
-      return stylish(tree);
-  }
+const toJson = (data) => JSON.stringify(data, null, 2);
+
+const renderActions = {
+  stylish: stylish,
+  plain: plain,
+  json: toJson,
 };
 
-export default getFormat;
+export default (tree, format = 'stylish') => renderActions[format](tree);
