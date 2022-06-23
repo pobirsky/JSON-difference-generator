@@ -21,7 +21,7 @@ const plain = (data) => {
         case 'deleted':
           return `Property '${newPath}' was removed`;
         case 'added':
-          return `Property '${newPath}' was added with value: ${format(node.value2)}`;
+          return `Property '${newPath}' was added with value: ${format(node.value)}`;
         case 'changed':
           return `Property '${newPath}' was updated. From ${format(node.value1)} to ${format(node.value2)}`;
         default:

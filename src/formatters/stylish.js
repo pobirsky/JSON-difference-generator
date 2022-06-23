@@ -36,19 +36,19 @@ const formatter = (tree) => {
         }
         case 'unchanged': {
           return `${tab}  ${key.name}: ${getFormattedValue(
-            key.value1,
+            key.value,
             depth + 1,
           )}`;
         }
         case 'deleted': {
           return `${tab}- ${key.name}: ${getFormattedValue(
-            key.value1,
+            key.value,
             depth + 1,
           )}`;
         }
         case 'added': {
           return `${tab}+ ${key.name}: ${getFormattedValue(
-            key.value2,
+            key.value,
             depth + 1,
           )}`;
         }

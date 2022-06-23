@@ -9,7 +9,7 @@ const buildDiff = (data1, data2) => {
       return {
         name: key,
         type: 'added',
-        value2,
+        value: value2,
       };
     }
 
@@ -17,7 +17,7 @@ const buildDiff = (data1, data2) => {
       return {
         name: key,
         type: 'deleted',
-        value1,
+        value: value1,
       };
     }
 
@@ -38,7 +38,7 @@ const buildDiff = (data1, data2) => {
       };
     }
 
-    return { name: key, type: 'unchanged', value1 };
+    return { name: key, type: 'unchanged', value: value1 };
   };
 
   const sortedKeys = _.sortBy(_.union(Object.keys(data1), Object.keys(data2)));

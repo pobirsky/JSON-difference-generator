@@ -1,12 +1,12 @@
 import yaml from 'js-yaml';
 
-export default (filecontent, extention) => {
+export default (content, extention) => {
   switch (extention) {
     case 'json':
-      return JSON.parse(filecontent);
+      return JSON.parse(content);
     case 'yml':
     case 'yaml':
-      return yaml.load(filecontent);
+      return yaml.load(content);
     default:
       throw new Error(`Invalid file extention: ${extention}! Change!`);
   }
