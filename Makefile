@@ -12,4 +12,4 @@ test:
 build:
 	npm run build
 publink:
-		npm publish --dry-run | npm link
+	npm publish --dry-run | npm link

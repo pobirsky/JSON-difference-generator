@@ -1,4 +1,4 @@
-const format = (val) => {
+const stringify = (val) => {
   if (val === null) {
     return null;
   }
@@ -11,7 +11,7 @@ const format = (val) => {
   return val;
 };
 
-const plain = (data) => {
+export default (data) => {
   const iter = (children, parent) => {
     const diffColl = children.flatMap((node) => {
       const newPath = parent ? `${parent}.${node.name}` : `${node.name}`;
@@ -21,18 +21,14 @@ const plain = (data) => {
         case 'deleted':
           return `Property '${newPath}' was removed`;
         case 'added':
-          return `Property '${newPath}' was added with value: ${format(node.value)}`;
+          return `Property '${newPath}' was added with value: ${stringify(node.value)}`;
         case 'changed':
-          return `Property '${newPath}' was updated. From ${format(node.value1)} to ${format(node.value2)}`;
+          return `Property '${newPath}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
         default:
           return [];
       }
     });
-    // console.log(diffColl);
     return diffColl.join('\n');
   };
-  const result = iter(data, '');
-  return result;
+  return iter(data, '');
 };
-
-export default plain;
