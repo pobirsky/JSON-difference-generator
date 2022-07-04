@@ -48,7 +48,7 @@ const formatter = (tree) => {
             depth + 1,
           )}`;
         }
-        case 'changed': {
+        default: {
           const formattedOldValue = `${indent}- ${key.name}: ${stringify(
             key.value1,
             depth + 1,
@@ -58,9 +58,6 @@ const formatter = (tree) => {
             depth + 1,
           )}`;
           return formattedOldValue + formattedNewValue;
-        }
-        default: {
-          return 'kek';
         }
       }
     });
