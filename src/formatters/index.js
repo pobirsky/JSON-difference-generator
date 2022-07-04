@@ -2,15 +2,15 @@ import _ from 'lodash';
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const renderActions = {
+const formatters = {
   stylish,
   plain,
   json: (data) => JSON.stringify(data, null, 2),
 };
 
 export default (tree, format = 'stylish') => {
-  if (!_.has(renderActions, format)) {
+  if (!_.has(formatters, format)) {
     throw new Error(`Wrong format ${format}. Use only plain, json, stylish`);
   }
-  return renderActions[format](tree);
+  return formatters[format](tree);
 };

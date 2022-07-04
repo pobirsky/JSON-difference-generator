@@ -6,18 +6,20 @@ const stringify = (value, depth) => {
   }
 
   const indent = getIndent(depth);
-  const indentClose = getIndent(depth - 1, 4);
+  const indentClose = getIndent(depth - 1);
 
   const entries = Object.entries(value);
 
-  const result = entries.map(([key, innerValue]) => {
-    const tempString = `${indent}  ${key}: ${stringify(
-      innerValue,
-      depth + 1,
-    )}`;
-    return tempString;
-  });
+  const result = entries.map(
+    ([key, innerValue]) => `${indent}  ${key}: ${stringify(innerValue, depth + 1)}`,
+  );
   return ['{', ...result, `${indentClose}  }`].join('\n');
+};
+
+const sign = {
+  added: '+',
+  deleted: '-',
+  unchanged: ' ',
 };
 
 const formatter = (tree) => {
@@ -25,39 +27,23 @@ const formatter = (tree) => {
     const arrMap = node.map((key) => {
       const indent = getIndent(depth);
 
+      const makeLine = (value, mark) => `${indent}${mark} ${key.name}: ${stringify(value, depth + 1)}`;
+
       switch (key.type) {
-        case 'nested': {
-          const formattedChildren = iter(key.children, depth + 1);
-          return `${indent}  ${key.name}: {\n${formattedChildren}\n${indent}  }`;
-        }
         case 'unchanged': {
-          return `${indent}  ${key.name}: ${stringify(
-            key.value,
-            depth + 1,
-          )}`;
+          return makeLine(key.value, sign.unchanged);
         }
         case 'deleted': {
-          return `${indent}- ${key.name}: ${stringify(
-            key.value,
-            depth + 1,
-          )}`;
+          return makeLine(key.value, sign.deleted);
         }
         case 'added': {
-          return `${indent}+ ${key.name}: ${stringify(
-            key.value,
-            depth + 1,
-          )}`;
+          return makeLine(key.value, sign.added);
+        }
+        case 'changed': {
+          return `${makeLine(key.value1, sign.deleted)}\n${makeLine(key.value2, sign.added)}`;
         }
         default: {
-          const formattedOldValue = `${indent}- ${key.name}: ${stringify(
-            key.value1,
-            depth + 1,
-          )}\n`;
-          const formattedNewValue = `${indent}+ ${key.name}: ${stringify(
-            key.value2,
-            depth + 1,
-          )}`;
-          return formattedOldValue + formattedNewValue;
+          return `${indent}  ${key.name}: {\n${iter(key.children, depth + 1)}\n${indent}  }`;
         }
       }
     });
