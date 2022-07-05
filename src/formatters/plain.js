@@ -11,7 +11,7 @@ const stringify = (val) => {
   return val;
 };
 
-const newPath = (depth, current) => (depth === '' ? current : depth.concat(`.${current}`));
+const newPath = (parent, current) => (parent === '' ? current : parent.concat(`.${current}`));
 
 const mapper = {
   nested: ({ name, children }, depth, fn) => fn(children, newPath(depth, name)),
@@ -21,8 +21,7 @@ const mapper = {
   unchanged: () => null,
 };
 
-export default (data) => {
+export default (tree) => {
   const iter = (ast, depth) => ast.map((node) => mapper[node.type](node, depth, iter)).join('\n');
-  // JSON.stringify(ast, null, 4);
-  return iter(data, '');
+  return iter(tree, '');
 };
