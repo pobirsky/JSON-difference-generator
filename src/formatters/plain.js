@@ -11,24 +11,18 @@ const stringify = (val) => {
   return val;
 };
 
+const newPath = (depth, current) => (depth === '' ? current : depth.concat(`.${current}`));
+
+const mapper = {
+  nested: ({ name, children }, depth, fn) => fn(children, newPath(depth, name)),
+  added: ({ name, value }, depth) => `Property '${newPath(depth, name)}' was added with value: ${stringify(value)}`,
+  removed: ({ name }, depth) => `Property '${newPath(depth, name)}' was removed`,
+  changed: ({ name, value1, value2 }, depth) => `Property '${newPath(depth, name)}' was updated. From ${stringify(value1)} to ${stringify(value2)}`,
+  unchanged: () => null,
+};
+
 export default (data) => {
-  const iter = (children, parent) => {
-    const diffColl = children.flatMap((node) => {
-      const newPath = parent ? `${parent}.${node.name}` : `${node.name}`;
-      switch (node.type) {
-        case 'nested':
-          return iter(node.children, newPath);
-        case 'deleted':
-          return `Property '${newPath}' was removed`;
-        case 'added':
-          return `Property '${newPath}' was added with value: ${stringify(node.value)}`;
-        case 'changed':
-          return `Property '${newPath}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
-        default:
-          return [];
-      }
-    });
-    return diffColl.join('\n');
-  };
+  const iter = (ast, depth) => ast.map((node) => mapper[node.type](node, depth, iter)).join('\n');
+  // JSON.stringify(ast, null, 4);
   return iter(data, '');
 };
