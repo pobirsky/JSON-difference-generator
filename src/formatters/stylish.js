@@ -1,14 +1,14 @@
-const getIndent = (currentDepth, multiplier = 4) => " ".repeat(currentDepth * multiplier - 2);
+const getIndent = (currentDepth, multiplier = 4) => ' '.repeat(currentDepth * multiplier - 2);
 
 const stringify = (value, depth) => {
-  if (typeof value !== "object" || value === null) {
+  if (typeof value !== 'object' || value === null) {
     return value;
   }
   const indent = getIndent(depth);
   const indentClose = getIndent(depth - 1);
   const entries = Object.entries(value);
   const result = entries.map(([key, innerValue]) => `${indent}  ${key}: ${stringify(innerValue, depth + 1)}`);
-  return ["{", ...result, `${indentClose}  }`].join("\n");
+  return ['{', ...result, `${indentClose}  }`].join('\n);
 };
 
 const mapper = {
