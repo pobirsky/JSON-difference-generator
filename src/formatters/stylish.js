@@ -8,7 +8,7 @@ const stringify = (value, depth) => {
   const indentClose = getIndent(depth - 1);
   const entries = Object.entries(value);
   const result = entries.map(([key, innerValue]) => `${indent}  ${key}: ${stringify(innerValue, depth + 1)}`);
-  return ['{', ...result, `${indentClose}  }`].join('\n);
+  return ['{', ...result, `${indentClose}  }`].join('\n');
 };
 
 const mapper = {
