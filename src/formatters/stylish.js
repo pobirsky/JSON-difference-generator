@@ -6,9 +6,8 @@ const stringify = (value, depth) => {
   }
   const indent = getIndent(depth);
   const indentClose = getIndent(depth - 1);
-  const entries = Object.entries(value);
-  const result = entries.map(([key, innerValue]) => `${indent}  ${key}: ${stringify(innerValue, depth + 1)}`);
-  return ['{', ...result, `${indentClose}  }`].join('\n');
+  const entries = Object.entries(value).map(([key, innerValue]) => `${indent}  ${key}: ${stringify(innerValue, depth + 1)}`);
+  return ['{', ...entries, `${indentClose}  }`].join('\n');
 };
 
 const mapper = {
@@ -16,9 +15,9 @@ const mapper = {
   added: ({ name, value }, depth) => `${getIndent(depth)}+ ${name}: ${stringify(value, depth + 1)}`,
   deleted: ({ name, value }, depth) => `${getIndent(depth)}- ${name}: ${stringify(value, depth + 1)}`,
   changed: ({ name, value1, value2 }, depth) => {
-    const oldVal = `${getIndent(depth)}- ${name}: `;
-    const newVal = `${getIndent(depth)}+ ${name}: `;
-    return `${oldVal}${stringify(value1, depth + 1)}\n${newVal}${stringify(value2, depth + 1)}`;
+    const oldValue = `${getIndent(depth)}- ${name}: `;
+    const newValue = `${getIndent(depth)}+ ${name}: `;
+    return `${oldValue}${stringify(value1, depth + 1)}\n${newValue}${stringify(value2, depth + 1)}`;
   },
   unchanged: ({ name, value }, depth) => `${getIndent(depth)}  ${name}: ${stringify(value, depth + 1)}`,
 };

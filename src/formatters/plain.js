@@ -11,13 +11,13 @@ const stringify = (val) => {
   return val;
 };
 
-const newPath = (parent, current) => (parent === '' ? current : parent.concat(`.${current}`));
+const getFullPath = (parents, current) => (parents === '' ? current : [parents, current].join('.'));
 
 const mapper = {
-  nested: ({ name, children }, depth, fn) => fn(children, newPath(depth, name)),
-  added: ({ name, value }, depth) => `Property '${newPath(depth, name)}' was added with value: ${stringify(value)}`,
-  deleted: ({ name }, depth) => `Property '${newPath(depth, name)}' was removed`,
-  changed: ({ name, value1, value2 }, depth) => `Property '${newPath(depth, name)}' was updated. From ${stringify(value1)} to ${stringify(value2)}`,
+  nested: ({ name, children }, depth, fn) => fn(children, getFullPath(depth, name)),
+  added: ({ name, value }, depth) => `Property '${getFullPath(depth, name)}' was added with value: ${stringify(value)}`,
+  deleted: ({ name }, depth) => `Property '${getFullPath(depth, name)}' was removed`,
+  changed: ({ name, value1, value2 }, depth) => `Property '${getFullPath(depth, name)}' was updated. From ${stringify(value1)} to ${stringify(value2)}`,
 };
 
 export default (tree) => {
