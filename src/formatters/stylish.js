@@ -2,7 +2,7 @@ const getIndent = (currentDepth, multiplier = 4) => ' '.repeat(currentDepth * mu
 
 const stringify = (value, depth) => {
   if (typeof value !== 'object' || value === null) {
-    return value;
+    return `${value}`;
   }
   const indent = getIndent(depth);
   const indentClose = getIndent(depth - 1);
