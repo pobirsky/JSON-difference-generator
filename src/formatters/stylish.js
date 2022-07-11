@@ -6,9 +6,9 @@ const stringify = (value, depth) => {
   if (!_.isObject(value)) {
     return `${value}`;
   }
-  const indent = getIndent(depth);
-  const entries = Object.entries(value).map(([key, innerValue]) => `${indent}  ${key}: ${stringify(innerValue, depth + 1)}`);
-  return `{\n${entries.join('\n')}\n${indent}  }`;
+
+  const entries = Object.entries(value).map(([key, innerValue]) => `${getIndent(depth + 1)}  ${key}: ${stringify(innerValue, depth + 1)}`);
+  return `{\n${entries.join('\n')}\n${getIndent(depth)}  }`;
 };
 
 const mapper = {
