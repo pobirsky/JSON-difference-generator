@@ -7,7 +7,7 @@ const buildDiff = (data1, data2) => {
 
     if (!_.has(data1, key)) {
       return {
-        name: key,
+        key,
         type: 'added',
         value: value2,
       };
@@ -15,7 +15,7 @@ const buildDiff = (data1, data2) => {
 
     if (!_.has(data2, key)) {
       return {
-        name: key,
+        key,
         type: 'deleted',
         value: value1,
       };
@@ -23,7 +23,7 @@ const buildDiff = (data1, data2) => {
 
     if (_.isObject(value1) && _.isObject(value2)) {
       return {
-        name: key,
+        key,
         type: 'nested',
         children: buildDiff(value1, value2),
       };
@@ -31,14 +31,14 @@ const buildDiff = (data1, data2) => {
 
     if (!_.isEqual(value1, value2)) {
       return {
-        name: key,
+        key,
         type: 'changed',
         value1,
         value2,
       };
     }
 
-    return { name: key, type: 'unchanged', value: value1 };
+    return { key, type: 'unchanged', value: value1 };
   };
 
   const sortedKeys = _.sortBy(_.union(Object.keys(data1), Object.keys(data2)));
